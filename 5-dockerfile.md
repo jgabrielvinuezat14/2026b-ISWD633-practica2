@@ -82,14 +82,15 @@ Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso
 
 ### Crear un contenedor a partir de las imagen creada, mapear todos los puertos
 ```
-
+docker run -d --name srv-imagen2 -p 8080:80 imagen:2.0
 ```
 
 ### ¿Con que puerto host se está realizando el mapeo?
-# COMPLETAR CON LA RESPUESTA
+
+El mapeo es realizado a través del puerto 8080 del host hacia el puerto 80 del contenedor.
 
 **¿Qué es una imagen huérfana?**
-# COMPLETAR CON LA RESPUESTA
+Es una imagen que no tiene una etiqueta asociada y suele aparecer como <none>:<none>. Generalmente esto se genera cuando una nueva construcción reemplaza una etiqueta anterior y deja la imagen previa sin etiqueta.
 
 ### Identificar imágenes huérfanas
 ```
