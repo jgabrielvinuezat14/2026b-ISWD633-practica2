@@ -58,16 +58,19 @@ docker build -t imagen:1.0 .
 
 **¿Cuántos pasos se han ejecutado?**
 
-
-En el registro aparecen 9 pasos numerados, desde #1 hasta #9, donde los pasos #1, #2, #3 y #4 corresponden a tareas internas de preparación, mientras que #5 a #8 muestran etapas principales de la imagen y #9 exporta el resultado.
+En la salida de Docker se muestran 10 pasos numerados, desde #0 hasta #9. Los cuales incluyen tareas internas de preparación, procesamiento de las instrucciones del Dockerfile y exportación de la imagen.
 
 ### Inspeccionar la imagen creada
 
-
-
+```
+docker image inspect imagen:1.0
+```
+![Inspeccion de la imagen Docker](Captura-inspeccion-imagen.png)
 
 **Modificar el archivo index.html para incluir su nombre y luego crear una nueva versión de la imagen anterior**
 **¿Cuántos pasos se han ejecutado? ¿Observa algo diferente en la creación de la imagen**
+
+Sí. En la segunda construcción los 10 pasos se completaron, pero no todos ejecutaron trabajo nuevo. Docker reutilizó la caché de las instrucciones RUN, ya que no habían cambiado. En cambio, volvió a procesar la instrucción COPY para incorporar el archivo index.html modificado. Por lo que esta segunda version se creó en menos tiempo.
 
 ## Mecanismo de caché
 Docker usa un mecanismo de caché cuando crea imágenes para acelerar el proceso de construcción y evitar la repetición de pasos que no han cambiado. Cada instrucción en un Dockerfile crea una capa en la imagen final. Docker intenta reutilizar las capas de una construcción anterior si no han cambiado, lo que reduce significativamente el tiempo de construcción.
